@@ -102,7 +102,7 @@ class SinglyLinkedList:
                 p = p.next_node
 
         if not not_found:
-            return p.next_node
+            return p
         return None
 
 
@@ -211,10 +211,13 @@ class SinglyLinkedList:
         return pre, cur
 
     def print_all(self):
-        node = self.__head
-        while node.next_node is not None:
-            node = node.next_node
+        node = self.__head.next_node
+        # while node.next_node is not None:
+        #     node = node.next_node
+        #     print(node.data)
+        while node is not None:
             print(node.data)
+            node = node.next_node
 
     def cycle_detect(self):
         """检查链表中是否有环
@@ -321,6 +324,17 @@ def test_cycle_detect():
     print(sl.cycle_detect().data)
 
 
+def test_find_node_before():
+    sl = SinglyLinkedList()
+    for i in range(5):
+        sl.insert_to_tail(i)
+
+    sl.print_all()
+    pre_node, node = sl.find_by_value(2)
+    print(sl.find_node_before(node).data)
+
+
 if __name__ == "__main__":
     # test_cycle_detect()
-    test_merge_ordered_linklist()
+    # test_merge_ordered_linklist()
+    test_find_node_before()
