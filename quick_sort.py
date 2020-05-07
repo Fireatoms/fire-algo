@@ -1,6 +1,6 @@
 # 快速排序是从上往下进行排序操作，不断的选取参考点，将数组分散到参考点的左右
-# 递推公式：quick_sort_c(arr, p, r) = quick_sort_c(arr, p, q-1) + quick_sort(arr, q+1, r)，注意这里的+不能简单理解成相加，理论上更像一个连接的意味
-# 终止条件很好找：p <= r。指的注意的是分割点在q，这个q的左端都小于a[q],右端都大于a[q]
+# 递推公式：quick_sort_c(arr, p, r) = quick_sort_c(arr, p, q-1) + quick_sort_c(arr, q+1, r)，注意这里的+不能简单理解成相加，理论上更像一个连接的意味
+# 终止条件很好找：p >= r。指的注意的是分割点在q，这个q的左端都小于a[q],右端都大于a[q]
 
 
 def quick_sort(arr):
