@@ -1,6 +1,7 @@
 # 跳表：带索引的链表，简化起见，存的是正整数，且数据不重复
 import random
 
+
 class Node:
     """跳表结点数据结构
     1. value：存储的数据值（索引也沿用这个值）
@@ -16,7 +17,7 @@ class Node:
 
 
 class SkipList:
-    # 此跳表最多15级索引，n/2^15 = 2，每2个结点抽出一个索引，按照这个规则可以推算下原始链表中的数据为2^16个，logn的时间复杂度实在是高效
+    # 此跳表最多16级索引，n/2^16 = 2，每2个结点抽出一个索引，按照这个规则可以推算下原始链表中的数据为2^17个，logn的时间复杂度实在是高效
     MAX_LEVEL = 16
 
     def __init__(self):
@@ -50,6 +51,31 @@ class SkipList:
         # 更新跳表的索引层数
         if level > self.index_level:
             self.index_level = level
+
+    def efficient_insert(self, value):
+        level = self.random_level()
+        new_node = Node(value)
+        new_node.max_index_level = level
+        new_node.forwards = [None] * level
+        # max_level：开始搜索位置的最大索引层数。两种情况：1. 新插入结点level大于当前跳表的索引层数 2. 新插入结点level小于当前跳表索引层数
+        # 1情况时，从level开始建立索引，并且插入成功后更新跳表的索引层数到level
+        # 2情况时，从跳表index_level索引层数开始为了能够尽快的找到待插入位置
+        max_level = max(level, self.index_level)
+        update = [None] * level
+
+        p = self.head
+        for i in range(max_level - 1, -1, -1):
+            while p.forwards[i] and p.forwards[i].value < value:
+                p = p.forwards[i]
+
+            if i < level:
+                update[i] = p
+
+        for i in range(level - 1, -1, -1):
+            new_node.forwards[i] = update[i].forwards[i]
+            update[i].forwards[i] = new_node
+
+        self.index_level = max_level
 
     def find(self, value):
         p = self.head
@@ -105,7 +131,7 @@ class SkipList:
 def test_skip_list():
     sl = SkipList()
     for i in range(10):
-        sl.insert(i)
+        sl.efficient_insert(i)
     print(sl)
 
 
