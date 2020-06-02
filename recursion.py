@@ -39,6 +39,29 @@ def step_count_recursion(n):
     return ret
 
 
+def step_count(n):
+    """上面用递归求解这个问题时，想用一个字典在各个子调用中共享已有的计算结果
+    但由于递归编程技巧有限的原因，使用了全局变量进行共享，现在更习惯引入另外一个函数，通过传参可变元素来实现
+    """
+    solved_list = {}
+    return step_count_r(n, solved_list)
+
+
+def step_count_r(n, solved_list):
+    # 递归终止条件，实际上就是斐波那契数列数列，但是这里考虑到实际意义，所以f(0)被认为是无效的
+    if n == 1:
+        return 1
+    if n == 2:
+        return 2
+
+    if n in solved_list:
+        return solved_list[n]
+
+    res = step_count_r(n - 1, solved_list) + step_count_r(n - 2, solved_list)
+    solved_list[n] = res
+    return res
+
+
 def step_count_iteration(n):
     """使用迭代的方式求解
     怎么去设置变量和写出迭代公式：
@@ -75,7 +98,7 @@ def test_step_count_recursion():
 
 if __name__ == "__main__":
     # print(tell_what_row(10))
-    test_step_count_recursion()
+    # test_step_count_recursion()
     # test_step_count_iteration()
     # print(id(deep), deep)
     # print("*******")
@@ -91,3 +114,4 @@ if __name__ == "__main__":
     # print(id(lp), lp)
     # lp[0] = 2
     # print(id(lp), lp)
+    print(step_count(5))
