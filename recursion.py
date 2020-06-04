@@ -80,7 +80,7 @@ def step_count_iteration(n):
 
     pre = 2
     prepre = 1
-    for i in range(2, n):
+    for i in range(0, n-2):
         ret = pre + prepre
         prepre = pre
         pre = ret
@@ -99,7 +99,7 @@ def test_step_count_recursion():
 if __name__ == "__main__":
     # print(tell_what_row(10))
     # test_step_count_recursion()
-    # test_step_count_iteration()
+    test_step_count_iteration()
     # print(id(deep), deep)
     # print("*******")
     # test_step_count_recursion()
@@ -114,4 +114,4 @@ if __name__ == "__main__":
     # print(id(lp), lp)
     # lp[0] = 2
     # print(id(lp), lp)
-    print(step_count(5))
+    print(step_count(7))
