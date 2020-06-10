@@ -1,5 +1,6 @@
 # link: https://leetcode.com/problems/kth-largest-element-in-a-stream/
 from typing import List
+import heapq
 
 # 自己实现堆数据结构
 class KthLargest:
@@ -60,11 +61,35 @@ class KthLargest:
 # param_1 = obj.add(val)
 
 
+class KthLargest1:
+
+    def __init__(self, k, nums):
+        self.heap = nums
+        self.k = k
+        # python 内置函数处理list变为小顶堆
+        heapq.heapify(self.heap)
+
+        j = len(self.heap) - self.k
+        while j > 0:
+            heapq.heappop(self.heap)
+            j -= 1
+
+    def add(self, val):
+        if self.k > len(self.heap):
+            heapq.heappush(self.heap, val)
+        else:
+            if val > self.heap[0]:
+                # 就这一个判断是否进行堆化就能优化很多时间消耗
+                heapq.heapreplace(self.heap, val) # 92ms
+            # heapq.heappushpop(self.heap, val) 156ms
+
+        return self.heap[0]
+
+
 if __name__ == "__main__":
     arr = [5, -1]
     k = 3
-    kl = KthLargest(k, arr)
-    print(kl.data)
+    kl = KthLargest1(k, arr)
     print(kl.add(2))
     print(kl.add(1))
     print(kl.add(-1))
