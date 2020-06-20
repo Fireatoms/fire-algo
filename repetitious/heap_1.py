@@ -1,4 +1,4 @@
-# heap
+# max heap
 
 
 def up(arr, idx):
