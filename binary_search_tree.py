@@ -112,7 +112,8 @@ class BinarySearchTree:
 
         # 这里提前找到待删除结点的子结点，免得后面执行删除时每个分支再次重复判断
         if p.left is not None:
-            # 这个找child，如果有左子结点，优先左子结点的设计也是很有考究
+            # 这个找child，如果有左子结点，优先左子结点的设计也是很有考究：before
+            # 有个屁的考究，本来到这的待处理节点最多就只有一个左或右子节点，先左先右都一样：20200621
             child = p.left
         elif p.right is not None:
             child = p.right
