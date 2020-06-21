@@ -142,7 +142,7 @@ class BinarySearchTree:
                 p = p.left
             elif value > p.value:
                 pp = p
-                p = p.value
+                p = p.right
             else:
                 pp_arr.append(pp)
                 p_arr.append(p)
@@ -280,7 +280,7 @@ def test_no_duplicate_tree():
     bst.insert(33)
     # bst.in_order_traverse()
     bst.traverse_by_layer()
-    print(bst.delete_support_duplicate_node(33))
+    print(bst.delete_support_duplicate_node(50))
     bst.traverse_by_layer()
     print("find the larget and least node in bst: ")
     print(bst.find_larget_node())
