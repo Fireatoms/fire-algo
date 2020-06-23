@@ -29,17 +29,15 @@ class Graph:
         visted[s] = True
 
         while queue:
-            print(queue)
             ver = queue.popleft()
             for ver_con in self.adj[ver]:
                 if not visted[ver_con]:
                     prev[ver_con] = ver
                     visted[ver_con] = True
-                    if ver_con != t:
-                        queue.append(ver_con)
-                    else:
+                    if ver_con == t:
                         self.print_path(prev, s, t)
                         return
+                    queue.append(ver_con)
 
     def print_path(self, prev, s, t):
         if prev[t] != -1 and s != t:
