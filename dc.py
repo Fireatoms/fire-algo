@@ -1,7 +1,7 @@
 # divide and conquer
 
 # use merge sorting to calculate the num of reverse pair
-
+from typing import List
 
 class CalculateRversePairs:
     def __init__(self):
@@ -47,8 +47,26 @@ class CalculateRversePairs:
 
         arr[p:r+1] = tmp
 
+# link: https://www.geeksforgeeks.org/c-program-for-tower-of-hanoi/
+# tower of hanoi
+"""
+The pattern here is :
+Shift 'n-1' disks from 'A' to 'B'.
+Shift last disk from 'A' to 'C'.
+Shift 'n-1' disks from 'B' to 'C'.
+"""
+def tower_of_hanoi(n, from_rod, aux_rod, to_rod):
+    if n == 1:
+        print('Move disk 1 from rod {} to {}'.format(from_rod, to_rod))
+        return
+
+    tower_of_hanoi(n-1, from_rod, to_rod, aux_rod)
+    print('Move disk {} from rod {} to {}'.format(n, from_rod, to_rod))
+    tower_of_hanoi(n-1, aux_rod, from_rod, to_rod)
+
 
 if __name__ == "__main__":
-    crp = CalculateRversePairs()
-    re_num = crp.calculate_num([i for i in range(5, -1, -1)])
-    print('reverse pair nums: {}'.format(re_num))
+    tower_of_hanoi(4, 'A', 'B', 'C')
+    # crp = CalculateRversePairs()
+    # re_num = crp.calculate_num([i for i in range(5, -1, -1)])
+    # print('reverse pair nums: {}'.format(re_num))
