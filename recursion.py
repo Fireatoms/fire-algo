@@ -80,12 +80,34 @@ def step_count_iteration(n):
 
     pre = 2
     prepre = 1
+    ret = 0
     for i in range(0, n-2):
         ret = pre + prepre
         prepre = pre
         pre = ret
 
     return ret
+
+class StepSolution:
+    def __init__(self):
+        self.__solved_list = {}
+
+    def count_step(self, n):
+        count = self.count_step_r(n)
+        # reset solved list, not necessary in this situation
+        self.__solved_list.clear()
+        return count
+
+    def count_step_r(self, n):
+        if n < 2:
+            return 1
+
+        if n in self.__solved_list:
+            return self.__solved_list[n]
+
+        res = self.count_step_r(n-1) + self.count_step_r(n-2)
+        self.__solved_list[n] = res
+        return res
 
 
 def test_step_count_iteration():
@@ -97,9 +119,11 @@ def test_step_count_recursion():
 
 
 if __name__ == "__main__":
+    ss = StepSolution()
+    print(ss.count_step(100))
     # print(tell_what_row(10))
     # test_step_count_recursion()
-    test_step_count_iteration()
+    # test_step_count_iteration()
     # print(id(deep), deep)
     # print("*******")
     # test_step_count_recursion()
@@ -114,4 +138,4 @@ if __name__ == "__main__":
     # print(id(lp), lp)
     # lp[0] = 2
     # print(id(lp), lp)
-    print(step_count(7))
+    # print(step_count(100))
