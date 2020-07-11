@@ -55,18 +55,42 @@ Shift 'n-1' disks from 'A' to 'B'.
 Shift last disk from 'A' to 'C'.
 Shift 'n-1' disks from 'B' to 'C'.
 """
-def tower_of_hanoi(n, from_rod, aux_rod, to_rod):
-    if n == 1:
-        print('Move disk 1 from rod {} to {}'.format(from_rod, to_rod))
-        return
+class TowerOfHanoi:
+    def __init__(self, n):
+        self.__n = n
+        self.__poles = [[i for i in range(n, 0, -1)], [], []]
+        self.__from = 'A'
+        self.__aux = 'B'
+        self.__to = 'C'
+        self.__poles_dict = {self.__from: 0, self.__aux: 1, self.__to: 2}
 
-    tower_of_hanoi(n-1, from_rod, to_rod, aux_rod)
-    print('Move disk {} from rod {} to {}'.format(n, from_rod, to_rod))
-    tower_of_hanoi(n-1, aux_rod, from_rod, to_rod)
+    def solve(self):
+        self.process(self.__n)
+
+    def process(self, n, from_rod='A', aux_rod='B', to_rod='C'):
+        if n > 0:
+            self.process(n-1, from_rod, to_rod, aux_rod)
+            print('Move disk {} from rod {} to {}'.format(n, from_rod, to_rod))
+            self.move(from_rod, to_rod)
+            self.display_rods()
+            self.process(n-1, aux_rod, from_rod, to_rod)
+        else:
+            return
+
+    def move(self, source, destination):
+        source_idx = self.__poles_dict[source]
+        dest_idx = self.__poles_dict[destination]
+
+        top = self.__poles[source_idx].pop()
+        self.__poles[dest_idx].append(top)
+
+    def display_rods(self):
+        print('A: {} B: {} C: {}'.format(self.__poles[0], self.__poles[1], self.__poles[2]))
 
 
 if __name__ == "__main__":
-    tower_of_hanoi(4, 'A', 'B', 'C')
+    th = TowerOfHanoi(3)
+    th.solve()
     # crp = CalculateRversePairs()
     # re_num = crp.calculate_num([i for i in range(5, -1, -1)])
     # print('reverse pair nums: {}'.format(re_num))
