@@ -167,6 +167,13 @@ def test_browser():
     print(b.forward())
 
 
+def str_to_num(s):
+    try:
+        return int(s)
+    except ValueError:
+        return float(s)
+
+
 def calculate_stack(expression):
     """使用栈实现简易的运算式计算，仅支持+-*/四种运算符
     运算数栈，操作符栈。操作符入栈时：如果操作符优先级等于或小于栈顶操作符，则取出数栈和栈顶运算符进行运算
@@ -186,11 +193,16 @@ def calculate_stack(expression):
                 op_top = operator_stack.stack_top()
             operator_stack.push(v)
         else:
-            num_stack.push(int(v))
-    n = num_stack.pop()
-    m = num_stack.pop()
-    op_now = operator_stack.pop()
-    return execute(m, n, op_now)
+            num_stack.push(str_to_num(v))
+
+    while operator_stack.stack_top():
+        op = operator_stack.pop()
+        n = num_stack.pop()
+        m = num_stack.pop()
+        tmp = execute(m, n, op)
+        num_stack.push(str_to_num(tmp))
+
+    return num_stack.pop()
 
 
 def execute(m, n, op):
@@ -235,7 +247,7 @@ def test_is_bracket_match():
 
 
 def test_calculate_stack():
-    expression = '3+5*8-6'
+    expression = '3+5*8-6/3'
     print(calculate_stack(expression))
 
 
@@ -270,6 +282,6 @@ if __name__ == '__main__':
     # test_stack()
     # test_link_stack()
     # test_stack_dynamic()
-    # test_calculate_stack()
+    test_calculate_stack()
     # test_is_bracket_match()
-    test_browser()
+    # test_browser()
