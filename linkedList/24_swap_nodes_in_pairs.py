@@ -1,4 +1,5 @@
 # link: https://leetcode.com/problems/swap-nodes-in-pairs/
+# refer: https://leetcode.com/problems/swap-nodes-in-pairs/discuss/171788/Python-or-Dummynode
 
 
 class ListNode:
