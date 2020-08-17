@@ -37,6 +37,33 @@ class Solution:
         return dummy_pos.next
 
 
+class Solution1:
+    def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
+        pre =  None
+        cur = head
+
+        # cur -> m, cur begin at 1, so loop m - 1 times
+        while m > 1:
+            pre = cur
+            cur = cur.next
+            m, n = m - 1, n - 1
+
+        con, tail = pre, cur
+
+        while n:
+            third = cur.next
+            cur.next = pre
+            pre = cur
+            cur = third
+
+        if con:
+            con.next = tail
+        else:
+            head = pre
+        tail.next = cur
+        return head
+
+
 def contruct_list():
     head = ListNode(1)
     head_pos = head
