@@ -55,9 +55,11 @@ class Solution1:
             cur.next = pre
             pre = cur
             cur = third
+            # why do you forget decrease n again and again
+            n -= 1
 
         if con:
-            con.next = tail
+            con.next = pre
         else:
             head = pre
         tail.next = cur
