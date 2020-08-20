@@ -1,5 +1,5 @@
 # merge_sort，从上往下拆分问题，然后从下往上处理问题。不像快速排序是一边从上往下拆分问题，同时处理完问题
-# 递推公式：merge_sort_c(arr, p, r) = merge(merge_sort_c(arr, p, q), merge_sort_c(arr, p+1, r))
+# 递推公式：merge_sort_c(arr, p, r) = merge(merge_sort_c(arr, p, q), merge_sort_c(arr, q+1, r))
 # 终止条件：p >= r, q是中间点。注意在python3中，取整：q = (p+r)//2
 
 
