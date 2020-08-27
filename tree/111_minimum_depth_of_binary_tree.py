@@ -23,3 +23,12 @@ class Solution:
             self.dfs(root.left, ln+1, level)
         if root.right:
             self.dfs(root.right, ln+1, level)
+
+
+class Solution1:
+    # It is wrong way to get min level, but true to get max level.
+    def minDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+
+        return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
