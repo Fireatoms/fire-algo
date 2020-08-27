@@ -32,3 +32,14 @@ class Solution1:
             return 0
 
         return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
+
+
+class Solution2:
+    # right recursive way
+    def minDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        if root.left is None or root.right is None:
+            return max(self.minDepth(root.left), self.minDepth(root.right)) + 1
+        else:
+            return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
