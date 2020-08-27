@@ -1,5 +1,5 @@
 # link: https://leetcode.com/problems/minimum-depth-of-binary-tree/
-
+from collections import deque
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -43,3 +43,20 @@ class Solution2:
             return max(self.minDepth(root.left), self.minDepth(root.right)) + 1
         else:
             return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
+
+
+class Solution3:
+    # bfs
+    def minDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+
+        que = deque([(root, 0)])
+        while que:
+            node, level = que.popleft()
+            if not node.left and not node.right:
+                return level + 1
+            if node.left:
+                que.append((node.left, level+1))
+            if node.right:
+                que.append((node.right, level+1))
