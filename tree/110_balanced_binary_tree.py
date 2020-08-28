@@ -24,3 +24,30 @@ class Solution:
             res = False
 
         return max(l, r)+1, res
+
+
+class SolutionIter:
+    # preorder and layerorder both are ok.
+    # the key is to handle child node before node
+    def isBalanced(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+
+        preorder_list = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            preorder_list.append(node)
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+
+        node_depth = {None: 0}
+        for node in reversed(preorder_list):
+            left, right = node_depth[node.left], node_depth[node.right]
+            if abs(left - right) > 1:
+                return False
+            node_depth[node] = max(left, right) + 1
+
+        return True
