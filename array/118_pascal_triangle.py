@@ -15,3 +15,18 @@ class Solution:
             res.append(row)
 
         return res
+
+    def generate_dp(self, numRows: int) -> List[List[int]]:
+        tri = []
+
+        for i in range(numRows):
+            row = [None for _ in range(i+1)]
+            row[0], row[-1] = 1, 1
+
+            for j in range(1, i):
+                # i >= 2 guarantees tri[i] exists
+                row[j] = tri[i-1][j-1] + tri[i-1][j]
+
+            tri.append(row)
+
+        return tri
