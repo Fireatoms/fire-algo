@@ -42,7 +42,20 @@ class Solution:
 
         return len(nums) + 1
 
+    def first_missing_positive_zero(self, nums):
+        for i in range(len(nums)):
+            while 0 <= nums[i] < len(nums) and nums[nums[i]] != nums[i]:
+                tmp = nums[i]
+                nums[i], nums[tmp] = nums[tmp], nums[i]
+
+        for i in range(len(nums)):
+            if nums[i] != i:
+                return i
+
+        return len(i)
+
 if __name__ == "__main__":
-    nums = [1, 2, 0]
+    nums = [1, 2, 3, 0, -1]
     sl = Solution()
     print(sl.firstMissingPositive(nums))
+    print(sl.first_missing_positive_zero(nums))
