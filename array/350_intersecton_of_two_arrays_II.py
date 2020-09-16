@@ -1,4 +1,5 @@
-# link: https://leetcode.com/problems/intersection-of-two-arrays-ii/
+# link: https://leetcode.com/problems/intersection-of-two-arrays-ii/#
+# derivation： https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/solution/jin-jie-san-wen-by-user5707f/
 from collections import Counter
 
 
