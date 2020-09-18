@@ -74,6 +74,6 @@ class Solution:
 
 
 if __name__ == "__main__":
-    arr = [10,9,2,5,3,7,101,18]
+    arr = [3, 4, 1, 2]
     sl = Solution()
-    print(sl.lengthOfLIS(arr))
+    print(sl.lengthOfLIS_binary(arr))
