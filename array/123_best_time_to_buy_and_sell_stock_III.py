@@ -10,6 +10,7 @@ class Solution:
         n, k = len(prices), 2
 
         prices_diff = [prices[i + 1] - prices[i] for i in range(len(prices) - 1)]
+        if k > len(prices) // 2: return sum(diff for diff in prices_diff if diff > 0)
 
         # prices_diff = [prices[i] - prices[i-1] for i in range(1, len(prices))]
         # dp[0][0] = 0, mp[0][0] = 0
