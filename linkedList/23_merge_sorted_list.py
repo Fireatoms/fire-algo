@@ -25,6 +25,10 @@ class Solution:
 
 
 class Solution1:
+    """
+    their exists a solution can reduce the space complexity to o(1)
+    link: https://leetcode.com/problems/merge-k-sorted-lists/solution/
+    """
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         # devide and conquer
         if not lists:
