@@ -54,3 +54,17 @@ class Solution:
             if node.right: queue.append((node.right, depth + 1))
 
         return ans
+
+    def minDepthIterQueueLowTimeConsumption(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+
+        queue = deque([(root, 0)])
+        while queue:
+            node, depth = queue.popleft()
+            if not node.left and not node.right:
+                return depth + 1
+            if node.left: queue.append((node.left, depth + 1))
+            if node.right: queue.append((node.right, depth + 1))
+
+        return 0
