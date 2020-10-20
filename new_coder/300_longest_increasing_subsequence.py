@@ -22,7 +22,7 @@ class Solution:
                 ascend_list.append(num)
             else:
                 pos = 0
-                low, high = 0, len(ascend_list)
+                low, high = 0, len(ascend_list) - 1
                 while low <= high:
                     mid = low + (high - low) // 2
                     if ascend_list[mid] >= num:
