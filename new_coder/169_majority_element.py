@@ -38,6 +38,21 @@ class Solution:
         right_majority_count = sum(1 for i in nums[mid+1:high+1] if i == right_majority)
         return left_majority if left_majority_count > right_majority_count else right_majority
 
+    def majorityElementBm(self, nums: List[int]) -> int:
+        candidate = ''
+        count = 0
+
+        for num in nums:
+            if count == 0:
+                candidate = num
+
+            if num == candidate:
+                count += 1
+            else:
+                count -= 1
+
+        return candidate
+
 
 if __name__ == "__main__":
     # nums = [1, 2, 1, 1, 2, 2, 1, 3, 1, 1, 1, 1]
