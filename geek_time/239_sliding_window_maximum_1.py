@@ -8,6 +8,28 @@ class Solution:
         res = []
         queue = deque()
         n = len(nums)
+
+        def clean():
+            if queue and queue[0] == i - k:
+                queue.popleft()
+            while queue and nums[queue[-1]] <= nums[i]:
+                queue.pop()
+            queue.append(i)
+
+        for i in range(k):
+            clean()
+        res.append(nums[queue[0]])
+
+        for i in range(k, n):
+            clean()
+            res.append(nums[queue[0]])
+
+        return res
+
+    def maxSlidingWindowSimplify(self, nums: List[int], k: int) -> List[int]:
+        res = []
+        queue = deque()
+        n = len(nums)
         for i in range(n):
             if queue and queue[0] == i - k:
                 queue.popleft()
