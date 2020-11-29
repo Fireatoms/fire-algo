@@ -31,7 +31,19 @@ def partition(nums, p, r):
     return i
 
 
+def quick_sort_iter(nums):
+    stack = [0, len(nums)-1]
+    while stack:
+        high, low = stack.pop(), stack.pop()
+        if high - low <= 0:
+            continue
+
+        pivot_index = partition(nums, low, high)
+        stack.extend([low, pivot_index-1, pivot_index+1, high])
+
+
 if __name__ == "__main__":
     nums = [i for i in range(10, -1, -1)]
-    quick_sort(nums)
+    # quick_sort(nums)
+    quick_sort_iter(nums)
     print(nums)
