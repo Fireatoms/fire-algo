@@ -12,6 +12,7 @@ class TreeNode:
 class Solution:
     def __init__(self):
         self.ans = None
+        self.parents = {}
 
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         self.dfs_recur(root, p, q)
@@ -27,6 +28,26 @@ class Solution:
             self.ans = root
         return is_target_val or lson or rson
 
+    def lowestCommonAncestorIter(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        self.dfs_parents(root)
+        visited = set()
+        while p.val in self.parents:
+            visited.add(p)
+            p = self.parents[p.val]
+        while q.val in self.parents:
+            if q in visited:
+                return q
+            q = self.parents[q.val]
+        return root
+
+    def dfs_parents(self, root):
+        if not root:
+            return
+        if root.left: self.parents[root.left.val] = root
+        if root.right: self.parents[root.right.val] = root
+        self.dfs_parents(root.left)
+        self.dfs_parents(root.right)
+
 
 if __name__ == "__main__":
     root = TreeNode(3)
@@ -39,4 +60,4 @@ if __name__ == "__main__":
     root.left.right.left = TreeNode(7)
     root.left.right.right = TreeNode(4)
     sl = Solution()
-    print(sl.lowestCommonAncestor(root, root.left, root.right))
+    print(sl.lowestCommonAncestorIter(root, root.left.right, root.left).val)
