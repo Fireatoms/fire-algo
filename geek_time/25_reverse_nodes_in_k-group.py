@@ -53,7 +53,7 @@ class Solution:
         return dummy.next
 
     def reverse_nodes(self, head, tail):
-        pre = tail.next12
+        pre = tail.next
         cur = head
 
         while pre != tail:
@@ -73,5 +73,5 @@ if __name__ == "__main__":
     head.next.next.next.next = ListNode(5)
 
     sl = Solution()
-    head = sl.reverseKGroup(head, 2)
+    head = sl.reverseKGroupIter(head, 2)
     print(head)
